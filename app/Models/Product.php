@@ -10,6 +10,7 @@ class Product extends Model
     use HasFactory;
     protected $guarded = [];
 
+
     //rel
     public function alternatives(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {

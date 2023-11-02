@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\URL;
 
 class ProductController extends Controller
 {
@@ -25,6 +26,11 @@ class ProductController extends Controller
                 ->leftjoin('product_statuses', 'product_statuses.id', 'products.product_status_id')
                 ->leftjoin('product_accepts', 'product_accepts.id', 'products.product_accept_id')
             ->get();
+
+        foreach ($products as $product) {
+            $path= asset('storage/'.$product->product_image);
+            $product->product_image = $path;
+        }
         return response()->apiSuccess($products);
     }
 
