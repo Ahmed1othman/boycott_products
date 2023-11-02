@@ -13,6 +13,6 @@ class Product extends Model
     //rel
     public function alternatives(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
     {
-        return $this->belongsToMany(Product::class, 'product_alternative', 'product_id', 'alternative_id');
+        return $this->belongsToMany(Product::class, 'alternatives', 'product_id', 'alternative_id');
     }
 }
