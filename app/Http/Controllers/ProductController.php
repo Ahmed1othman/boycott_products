@@ -51,8 +51,9 @@ class ProductController extends Controller
             ->leftjoin('product_statuses', 'product_statuses.id', 'products.product_status_id')
             ->leftjoin('product_accepts', 'product_accepts.id', 'products.product_accept_id')
             ->with('alternatives')
-
             ->first();
+            $path= asset('storage/'.$product->product_image);
+            $product->product_image = $path;
         return response()->apiSuccess($product);
     }
 
