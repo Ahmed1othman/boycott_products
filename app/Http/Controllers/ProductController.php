@@ -12,6 +12,7 @@ class ProductController extends Controller
         $products = Product::select(
                 'products.id',
                 'products.product_name',
+                'products.product_image',
                 'companies.company_name',
                 'countries.country_name',
                 'categories.category_name',
@@ -42,7 +43,7 @@ class ProductController extends Controller
             ->leftjoin('categories', 'categories.id', 'products.category_id')
             ->leftjoin('product_statuses', 'product_statuses.id', 'products.product_status_id')
             ->leftjoin('product_accepts', 'product_accepts.id', 'products.product_accept_id')
-//            ->with('alternatives')
+            ->with('alternatives')
 
             ->first();
         return response()->apiSuccess($product);
