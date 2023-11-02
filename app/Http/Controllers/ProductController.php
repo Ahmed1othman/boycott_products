@@ -28,7 +28,7 @@ class ProductController extends Controller
             ->get();
 
         foreach ($products as $product) {
-            $path= asset('storage/'.$product->product_image);
+            $path= $product->product_image != null ? asset('storage/'.$product->product_image): null;
             $product->product_image = $path;
         }
         return response()->apiSuccess($products);
@@ -52,7 +52,7 @@ class ProductController extends Controller
             ->leftjoin('product_accepts', 'product_accepts.id', 'products.product_accept_id')
             ->with('alternatives')
             ->first();
-            $path= asset('storage/'.$product->product_image);
+            $path= $product->product_image != null ? asset('storage/'.$product->product_image): null;
             $product->product_image = $path;
         return response()->apiSuccess($product);
     }
