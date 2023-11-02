@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('product_name')->collation('utf8_arabic_ci');;
+            $table->string('product_name');
             $table->string('product_code')->nullable();
             $table->foreignId('company_id')->nullable()->references('id')->on('companies')->cascadeOnDelete();
             $table->foreignId('category_id')->nullable()->references('id')->on('categories')->cascadeOnDelete();

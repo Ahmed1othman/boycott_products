@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('countries', function (Blueprint $table) {
             $table->id();
             $table->string('country_code')->unique();
-            $table->string('country_name')->collation('utf8_arabic_ci');;
+            $table->string('country_name');;
             $table->boolean('country_status')->default(1);
             $table->timestamps();
         });

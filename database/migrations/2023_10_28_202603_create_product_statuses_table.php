@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('product_statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('status_name')->collation('utf8_arabic_ci');
+            $table->string('status_name');
             $table->timestamps();
         });
     }
