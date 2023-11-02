@@ -12,6 +12,7 @@ class ProductController extends Controller
         $products = Product::select(
                 'products.id',
                 'products.product_name',
+                'products.product_status_id',
                 'products.product_image',
                 'companies.company_name',
                 'countries.country_name',
