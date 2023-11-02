@@ -11,11 +11,9 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('countries', function (Blueprint $table) {
+        Schema::create('product_statuses', function (Blueprint $table) {
             $table->id();
-            $table->string('country_code')->unique();
-            $table->string('country_name')->collation('utf8_arabic_ci');;
-            $table->boolean('country_status')->default(1);
+            $table->string('status_name')->collation('utf8_arabic_ci');
             $table->timestamps();
         });
     }
@@ -25,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('countries');
+        Schema::dropIfExists('product_statuses');
     }
 };

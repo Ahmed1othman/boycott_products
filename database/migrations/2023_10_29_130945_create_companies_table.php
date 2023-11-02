@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('companies', function (Blueprint $table) {
             $table->id();
-            $table->string('company_name');
-            $table->foreignId('country_id')->nullable()->references('id')->on('countries');
-            $table->tinyInteger('company_type')->default(1);
+            $table->string('company_name')->collation('utf8_arabic_ci');;
+            $table->foreignId('country_id')->nullable()->references('id')->on('countries')->cascadeOnDelete();
+            $table->tinyInteger('company_status')->default(1);
             $table->timestamps();
         });
     }
