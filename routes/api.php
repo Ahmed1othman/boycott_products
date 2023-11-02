@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\CompanyController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
@@ -19,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('products',ProductController::class);
 Route::get('search-product', [ProductController::class,'searchProduct']);
-Route::apiResource('companies',CategoryController::class);
+Route::apiResource('companies',CompanyController::class);
 Route::apiResource('countries',CountryController::class);
+Route::apiResource('categories',CategoryController::class);
 
