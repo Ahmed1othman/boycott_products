@@ -9,4 +9,10 @@ class Product extends Model
 {
     use HasFactory;
     protected $guarded = [];
+
+    //rel
+    public function alternatives(): \Illuminate\Database\Eloquent\Relations\BelongsToMany
+    {
+        return $this->belongsToMany(Product::class, 'product_alternative', 'product_id', 'alternative_id');
+    }
 }
