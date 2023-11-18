@@ -1,10 +1,9 @@
 <?php
 
-use App\Http\Controllers\CategoryController;
-use App\Http\Controllers\CompanyController;
-use App\Http\Controllers\CountryController;
-use App\Http\Controllers\ProductController;
-use Illuminate\Http\Request;
+use App\Http\Controllers\API\CategoryController;
+use App\Http\Controllers\API\CompanyController;
+use App\Http\Controllers\API\CountryController;
+use App\Http\Controllers\API\ProductController;
 use Illuminate\Support\Facades\Route;
 
 /*

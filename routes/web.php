@@ -1,6 +1,8 @@
 <?php
 
+use App\Http\Controllers\LookupController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -12,7 +14,9 @@ use Illuminate\Support\Facades\Route;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+Route::get('dashboard',function (){
+    return "home";
+})->name('dashboard');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/lookup/{model}', [LookupController::class,'getLookupData']); // model must be like gender-type or country
+Route::resource('products',ProductController::class);
