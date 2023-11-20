@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StoreProductRequest;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -39,11 +41,19 @@ class ProductController extends Controller
         return view('products.show',$product);
     }
 
-    public function store(Request $request){
+    public function store(StoreProductRequest $request){
         $data = $request->only('product_name','category_id','company_id','product_status_id','product_accept_id');
+        if ($request->hasFile('product_image')){
+            $filename = 'organizations_'.time() . '.' .$request->product_image->getClientOriginalExtension();
+            $path =Storage::disk('public')->putFileAs(
+                'products',
+                $request->product_image,
+                $filename
+            );
+            $data['product_image'] = $path;
+        }
         Product::create($data);
-        Session::flash('success','تمت الاضافة بنجاخ');
-//        return redirect()->route('products.edit',$id);
+        Session::flash('success','تمت الاضافة بنجاح');
         return redirect()->route('products.index');
     }
 
@@ -51,7 +61,7 @@ class ProductController extends Controller
     {
         $user = auth()->user();
         $product = Product::findOrFail($id);
-        $userProduct = UserProduct::where('product_id', $product->id)
+        $userProduct = Product::where('product_id', $product->id)
             ->where('user_id', $user->id)
             ->first();
         if (!$userProduct)
@@ -59,11 +69,11 @@ class ProductController extends Controller
         return view('products.edit',get_defined_vars());
     }
 
-    public function update(ProductRequest $request, string $id)
+    public function update(StoreProductRequest $request, string $id)
     {
         $user = auth()->user();
         $data = $request->only('price','status');
-        $userProduct = UserProduct::where('product_id', $id)
+        $userProduct = Product::where('product_id', $id)
             ->where('user_id', $user->id)
             ->first();
         $userProduct->update($data);

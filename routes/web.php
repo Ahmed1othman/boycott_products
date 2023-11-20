@@ -14,8 +14,8 @@ use App\Http\Controllers\ProductController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
-Route::get('dashboard',function (){
-    return "home";
+Route::get('/',function (){
+    return view('admin.dashboard');
 })->name('dashboard');
 
 Route::get('/lookup/{model}', [LookupController::class,'getLookupData']); // model must be like gender-type or country

@@ -38,8 +38,13 @@
                     @csrf
                     <div class="row">
                         <div class="mb-1 col-md-6">
-                            <label class="form-label" for="basic-default-name">اسم المنتج</label>
-                            <input type="text" class="form-control" id="basic-default-name" name="product_name" placeholder="اسم المنتج - مثال: شيبسي" required/>
+                            <label class="form-label" for="product_name">اسم المنتج</label>
+                            <input type="text" class="form-control" id="product_name" name="product_name" placeholder="اسم المنتج - مثال: شيبسي" required/>
+                        </div>
+
+                        <div class="mb-1 col-md-6">
+                            <label class="form-label" for="product_code">كود المنتج</label>
+                            <input type="text" class="form-control" id="product_code" name="product_code" placeholder="" required/>
                         </div>
 
                         <div class="mb-1 col-md-6">
@@ -54,7 +59,7 @@
 
                         <div class="mb-1 col-md-6">
                             <label class="form-label" for="category_id">تصنيف المنتج</label>
-                            <select class="form-select select2" id="category_id" name="category_id">
+                            <select class="form-select select2" id="category_id" name="category_id" required>
                                 <option disabled selected>اختر تصنف المنتج</option>
                                 @foreach(\App\Http\Controllers\LookupController::getLookupData('Category') as $category)
                                     <option value="{{$category->id}}">{{$category->category_name}}</option>
@@ -64,7 +69,7 @@
 
                         <div class="mb-1 col-md-6">
                             <label class="form-label" for="product_status_id">موقف المنتج</label>
-                            <select class="form-select select2" id="product_status_id" name="product_status_id">
+                            <select class="form-select select2" id="product_status_id" name="product_status_id" required>
                                 <option disabled selected>اختر موقف المنتج</option>
                                 @foreach(\App\Http\Controllers\LookupController::getLookupData('ProductStatus') as $status)
                                     <option value="{{$status->id}}">{{$status->status_name}}</option>
@@ -73,7 +78,7 @@
                         </div>
                         <div class="mb-1 col-md-6">
                             <label class="form-label" for="product_accept_id">حالة الموافقة علي المنتج</label>
-                            <select class="form-select select2" id="product_accept_id" name="product_accept_id">
+                            <select class="form-select select2" id="product_accept_id" name="product_accept_id" required>
                                 <option disabled selected>اختر حالة الموافقة علي المنتج</option>
                                 @foreach(\App\Http\Controllers\LookupController::getLookupData('ProductAccept') as $status)
                                     <option value="{{$status->id}}">{{$status->value}}</option>
