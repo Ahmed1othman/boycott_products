@@ -120,7 +120,7 @@ class CategoriesSeeder extends Seeder
         ];
 
         foreach ($categories as $category){
-            Category::create(['category_name'=>$category]);
+            Category::create(['category_name'=>$category , 'image'=>'no-image.png']);
         }
     }
 }
