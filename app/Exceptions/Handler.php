@@ -28,7 +28,9 @@ class Handler extends ExceptionHandler
 
     public function render($request, Throwable $exception)
     {
-        return $this->handleApiException($request, $exception);
+        if($request->is('*api/*'))
+            return $this->handleApiException($request, $exception);
+        return parent::render($request, $exception);
     }
 
     protected function handleApiException($request, $exception)
