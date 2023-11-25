@@ -1,6 +1,6 @@
 @extends('layouts.admin.master')
 @section('title')
-    {{__('admin.products')}}
+    التصنيفات
 @endsection
 
 @section('vendor-style-rtl')
@@ -35,7 +35,7 @@
 @endsection
 
 @section('content')
-    <h3>قائمة المنتجات</h3>
+    <h3>قائمة التصنيفات</h3>
     <p class="mb-2">
 
     </p>
@@ -48,9 +48,9 @@
             <div class="card">
                 <div class="card-header">
                     <span class="align-content-end">
-                        <h3 class="h3">قائمة المنتجات</h3>
+                        <h3 class="h3">قائمة التصنيفات</h3>
                     </span>
-                    <span class="align-content-start"><a class="btn btn-primary" href="{{route('products.create')}}">اضافة منتج</a></span>
+                    <span class="align-content-start"><a class="btn btn-primary" href="{{route('categories.create')}}">اضافة منتج</a></span>
 
                 </div>
                 <div class="table-responsive">
@@ -59,52 +59,42 @@
                         <tr>
                             <th>#</th>
                             <th>الرقم التعريفي</th>
-                            <th>اسم المنتج</th>
-                            <th>الشركة المالكة</th>
-                            <th>الدولة</th>
-                            <th>التصنيف</th>
-                            <th>حالة المنتج</th>
-                            <th>حالة القبول</th>
-                            <th>صورة المنتج</th>
+                            <th>اسم التصنيف</th>
+                            <th>صورة التصنيف</th>
                             <th>تاريح الاضافة</th>
                             <th>الاجراءات</th>
                         </tr>
                         </thead>
                         <tbody>
-                        @foreach($products as $product)
-                            <tr id="row_{{$product->id}}">
+                        @foreach($categories as $category)
+                            <tr id="row_{{$category->id}}">
                                 <td>{{$loop->iteration}}</td>
-                                <td>{{$product->id}}</td>
-                                <td>{{$product->product_name}}</td>
-                                <td>{{$product->country_name}}</td>
-                                <td>{{$product->company_name}}</td>
-                                <td>{{$product->category_name}}</td>
-                                <td>{{$product->status_name}}</td>
-                                <td>{{$product->product_accept}}</td>
-                                <td>{{$product->product_image}}</td>
-                                <td>{{$product->created_at->diffForHumans()}}</td>
+                                <td>{{$category->id}}</td>
+                                <td>{{$category->category_name}}</td>
+                                <td>{{$category->image}}</td>
+                                <td>{{$category->created_at->diffForHumans()}}</td>
                                 <td>
                                     <div class="d-flex">
-                                        <a href="{{route('products.edit',$product->id)}}" style="display: inline-block" class="btn btn-info btn-sm">
+                                        <a href="{{route('categories.edit',$category->id)}}" style="display: inline-block" class="btn btn-info btn-sm">
                                             <i data-feather="edit"></i>
                                         </a>
 
-                                        <button type="button" class="btn btn-danger btn-sm " style="display: inline-block"  data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $product->id }}">
+                                        <button type="button" class="btn btn-danger btn-sm " style="display: inline-block"  data-bs-toggle="modal" data-bs-target="#delete-modal-{{ $category->id }}">
                                             <i data-feather="trash-2"></i>
                                         </button>
                                         <!-- Delete confirmation modal -->
-                                        <div class="modal fade modal-danger text-start text-capitalize" id="delete-modal-{{ $product->id }}" tabindex="-1" aria-labelledby="delete-modal-label-{{ $product->id }}" aria-hidden="true">
+                                        <div class="modal fade modal-danger text-start text-capitalize" id="delete-modal-{{ $category->id }}" tabindex="-1" aria-labelledby="delete-modal-label-{{ $category->id }}" aria-hidden="true">
                                         <div class="modal-dialog modal-dialog-centered">
                                             <div class="modal-content">
                                                 <div class="modal-header">
-                                                    <h5 class="modal-title" id="delete-modal-label-{{ $product->id }}">تأكيد الحذف</h5>
+                                                    <h5 class="modal-title" id="delete-modal-label-{{ $category->id }}">تأكيد الحذف</h5>
                                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                                 </div>
                                                 <div class="modal-body">
                                                     هل انت متأكد من حذف المنتج
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <form action="{{ route('products.destroy', $product->id) }}" method="POST">
+                                                    <form action="{{ route('categories.destroy', $category->id) }}" method="POST">
                                                         @csrf
                                                         @method('DELETE')
                                                         <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">إلغاء</button>
@@ -126,7 +116,7 @@
                 <div class="card-footer colo align-content-center">
                     <div class="d-flex align-self-center mx-0 row m-2 ">
                         <div class="pagination">
-                            {{ $products->links() }}
+                            {{ $categories->links() }}
                         </div>
                     </div>
                 </div>

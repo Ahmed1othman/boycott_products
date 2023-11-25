@@ -41,7 +41,7 @@
                         <span class="menu-title text-truncate" data-i18n="Dashboards">لوحة التحكم</span>
                     </a>
                 </li>
-                {{--admin-products--}}
+                {{--products--}}
                 <li class="nav-item">
                     <a class="d-flex align-items-center {{ request()->routeIs('products.*') ? 'active' : '' }}" href="#">
                         <i data-feather='shopping-cart'></i>
@@ -53,6 +53,38 @@
                             <a class="d-flex align-items-center" href="{{ route('products.index') }}">
                                 <i data-feather="circle"></i>
                                 <span class="menu-item text-truncate" data-i18n="Analytics">قائمة المنتجات</span>
+                            </a>
+                        </li>
+
+                        <li class="{{ request()->routeIs('products.create') ? 'active' : '' }}">
+                            <a class="d-flex align-items-center" href="{{ route('products.create') }}">
+                                <i data-feather="circle"></i>
+                                <span class="menu-item text-truncate" data-i18n="Analytics">إضافة منتج</span>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+
+                {{--categories--}}
+                <li class="nav-item">
+                    <a class="d-flex align-items-center {{ request()->routeIs('categories.*') ? 'active' : '' }}" href="#">
+                        <i data-feather='list'></i>
+                        <span class="menu-title text-truncate" data-i18n="Dashboards">إدارة التصنيفات</span>
+                        <span class="badge badge-light-success rounded-pill ms-auto me-1">{{\App\Models\Category::get()->count()}}</span>
+                    </a>
+                    <ul class="menu-content">
+                        <li class="{{ request()->routeIs('categories.index') ? 'active' : '' }}">
+                            <a class="d-flex align-items-center" href="{{ route('categories.index') }}">
+                                <i data-feather="circle"></i>
+                                <span class="menu-item text-truncate" data-i18n="Analytics">قائمة التصميفات</span>
+                            </a>
+                        </li>
+
+                        <li class="{{ request()->routeIs('categories.create') ? 'active' : '' }}">
+                            <a class="d-flex align-items-center" href="{{ route('categories.create') }}">
+                                <i data-feather="circle"></i>
+                                <span class="menu-item text-truncate" data-i18n="Analytics">إضافة تصنيف</span>
                             </a>
                         </li>
                     </ul>
