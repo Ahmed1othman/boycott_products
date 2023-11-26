@@ -19,14 +19,13 @@ class LookupController extends Controller
             'ProductTag',
         ];
 
-
         $modelClass = 'App\\Models\\' . kebabToPascal($model);
         if (class_exists($modelClass) && !in_array($modelClass, $allowedModels)) {
             $data = $modelClass::get()
                 ->makeHidden([
                     'created_at',
                     'updated_at',
-                ]);;
+                ]);
             return $data;
         }
         return "Error";

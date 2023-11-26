@@ -2,11 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\StoreProductRequest;
-use App\Http\Requests\UpdateProductRequest;
+use App\Http\Requests\StoreCategoryRequest;
+use App\Http\Requests\UpdateCategoryRequest;
 use App\Models\Category;
-use App\Models\Product;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Storage;
 
@@ -24,33 +22,33 @@ class CategoryController extends Controller
 
     public function show(string $id)
     {
-        $product = Product::findOrFail($id);
-        return view('categories.show',$product);
+        $product = Category::findOrFail($id);
+        return view('admin.categories.show',$product);
     }
 
-    public function store(StoreProductRequest $request){
-        $data = $request->only('product_name','category_id','company_id','product_status_id','product_accept_id');
-        if ($request->hasFile('product_image')){
-            $filename = 'organizations_'.time() . '.' .$request->product_image->getClientOriginalExtension();
+    public function store(StoreCategoryRequest $request){
+        $data = $request->only('category_name');
+        if ($request->hasFile('image')){
+            $filename = 'organizations_'.time() . '.' .$request->image->getClientOriginalExtension();
             $path =Storage::disk('public')->putFileAs(
                 'categories',
-                $request->product_image,
+                $request->image,
                 $filename
             );
-            $data['product_image'] = $path;
+            $data['image'] = $path;
         }
-        Product::create($data);
+        Category::create($data);
         Session::flash('success','تمت الاضافة بنجاح');
         return redirect()->route('categories.index');
     }
 
     public function edit(string $id)
     {
-        $product = Product::findOrFail($id);
+        $product = Category::findOrFail($id);
         return view('admin.categories.edit',get_defined_vars());
     }
 
-    public function update(UpdateProductRequest $request, string $id)
+    public function update(UpdateCategoryRequest $request, string $id)
     {
         $data = $request->only('product_name','category_id','company_id','product_status_id','product_accept_id');
         if ($request->hasFile('product_image')){
@@ -62,7 +60,7 @@ class CategoryController extends Controller
             );
             $data['product_image'] = $path;
         }
-        $product = Product::findOrFail($id);
+        $product = Category::findOrFail($id);
         $product->update($data);
 
         Session::flash('success', __('تم التحديث بنجاج'));
@@ -71,7 +69,7 @@ class CategoryController extends Controller
 
     public function destroy(string $id)
     {
-        $product = Product::findOrFail($id);
+        $product = Category::findOrFail($id);
         $product->delete();
         Session::flash('error','تم الحذف بنجاح');
         return redirect()->route('categories.index');

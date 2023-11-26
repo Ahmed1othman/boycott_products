@@ -71,7 +71,7 @@
                                 <td>{{$loop->iteration}}</td>
                                 <td>{{$category->id}}</td>
                                 <td>{{$category->category_name}}</td>
-                                <td>{{$category->image}}</td>
+                                <td><img src="{{asset($category->image_url)}}" style="width: 60px;height: 60px"></td>
                                 <td>{{$category->created_at->diffForHumans()}}</td>
                                 <td>
                                     <div class="d-flex">

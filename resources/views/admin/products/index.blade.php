@@ -81,7 +81,7 @@
                                 <td>{{$product->category_name}}</td>
                                 <td>{{$product->status_name}}</td>
                                 <td>{{$product->product_accept}}</td>
-                                <td>{{$product->product_image}}</td>
+                                <td><img src="{{asset($product->image_url)}}" style="width: 60px;height: 60px"></td>
                                 <td>{{$product->created_at->diffForHumans()}}</td>
                                 <td>
                                     <div class="d-flex">
